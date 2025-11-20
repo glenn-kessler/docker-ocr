@@ -2,16 +2,16 @@
 FROM alpine:latest
 
 # Installation von Tesseract und Ghostscript
-
+                                                                                
 RUN apk update && \
-    apk add --no-cache tesseract-ocr tesseract-ocr-data-deu ghostscript bash && \
+    apk add --no-cache tesseract-ocr tesseract-ocr-data-deu tesseract-ocr-data-eng ghostscript bash && \
     rm -rf /var/cache/apk/*
 
 # Arbeitsverzeichnis definieren
 WORKDIR /shared_data
 
 # Das Skript (ocr_script.sh) mit deutscher Sprachdefinition
-
+                                                                                       
 RUN echo '#!/bin/bash' > /ocr_script.sh && \
     echo 'INPUT_PDF="$1"' >> /ocr_script.sh && \
     echo 'OUTPUT_FILE="$2"' >> /ocr_script.sh && \
