@@ -4,7 +4,7 @@ FROM alpine:latest
 # Installation von Tesseract und Ghostscript
                                                                                 
 RUN apk update && \
-    apk add --no-cache tesseract-ocr tesseract-ocr-data-deu tesseract-ocr-data-eng ghostscript bash && \
+    apk add --no-cache tesseract-ocr tesseract-ocr-data-deu ghostscript bash && \
     rm -rf /var/cache/apk/*
 
 # Arbeitsverzeichnis definieren
@@ -21,7 +21,7 @@ RUN echo '#!/bin/bash' > /ocr_script.sh && \
     echo 'echo "Starte Tesseract OCR (Deutsch)..."' >> /ocr_script.sh && \
     echo '> "$OUTPUT_FILE"' >> /ocr_script.sh && \
     echo 'for img in page-*.png; do' >> /ocr_script.sh && \
-    echo '    tesseract "$img" stdout -l deu+eng --psm 3 >> "$OUTPUT_FILE"' >> /ocr_script.sh && \
+    echo '    tesseract "$img" stdout -l deu --psm 3 >> "$OUTPUT_FILE"' >> /ocr_script.sh && \
     echo '    echo "" >> "$OUTPUT_FILE"' >> /ocr_script.sh && \
     echo 'done' >> /ocr_script.sh && \
     echo 'echo "OCR abgeschlossen. Entferne temporäre Bilder..."' >> /ocr_script.sh && \
